@@ -1,0 +1,16 @@
+th {
+  text-align: inherit;
+  text-align: -webkit-match-parent;
+}
+
+.table-responsive thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #e4dfdf;
+}
+
+.table-responsive {
+    height: 450px;
+    overflow: auto;
+}
