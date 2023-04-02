@@ -2,14 +2,14 @@ import requests
 import json
 from typing import Final
 
-URL: Final = "https://app.airops.com/public_api/data_apps/10/execute"
+URL: Final = "https://app.airops.com/public_api/data_apps/1010/execute"
 API_KEY: Final = 'PXzgyDmk4lbkgCIvNw3o2cDa9We4IzBKDntkLOSIIJ4mf1l1GfAJ0GNNKPhf'
 
 
 def ai_query(query: str) -> str:
     def remove_substring(string: str) -> str:
         string = string.replace('```', '')
-        string = string.replace('zrbsdrtr.', '')
+        string = string.replace('haidisiz.', '')
         string = string.replace(';', '')
         string = string.replace('\n', ' ')
         return string
@@ -21,9 +21,12 @@ def ai_query(query: str) -> str:
 
     payload = {
         "input": {
-            "tables": "search_ownermodel",
-            "provider": "zrbsdrtr",
-            "question": f'{query}'
+            "schema": "license_plate_table_license_plate",
+            "provider": "haidisiz",
+            "question": f'{query}',
+            "dbt_boolean": [
+                "false"
+            ]
         }
     }
 

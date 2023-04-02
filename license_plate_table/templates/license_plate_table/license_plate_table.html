@@ -48,7 +48,7 @@
 </nav>
 <div class="container">
     <div class="row">
-        <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'license_plate_search_view' %}">
+        <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'license_plate_search_view' %}">
             {% csrf_token %}
             <div class="col-md-6" style="width: 148px;">
                 <div id="wrapper">
@@ -64,24 +64,18 @@
                         <div class="container" style="margin-bottom: 0px;margin-top: 10px;">
                             <div class="row">
                                 <div class="col-md-12" style="text-align: left;"><input type="text"
+                                                                                        name="search_license_name"
                                                                                         style="width: 225px;border-color: rgb(255,255,255);border-top-color: rgba(255,255,255,0);border-right-color: rgb(255,255,255);border-bottom-color: rgb(255,255,255);border-left-color: rgba(255,255,255,0);border-radius: 30px;font-size: 15px;text-align: center;--bs-light: #ffffff;--bs-light-rgb: 255,255,255;--bs-body-bg: #fff;height: 41px;margin-top: 18px;margin-right: 0px;margin-bottom: 20px;"
                                                                                         placeholder="License plate">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="dropdown"
-                                         style="background: #ffffff;border-radius: 30px;width: 197px;text-align: left;height: 41px;">
-                                        <button class="btn btn-primary dropdown-toggle" aria-expanded="false"
-                                                data-bs-toggle="dropdown" type="button"
-                                                style="color: rgb(208,202,202);background: rgb(255,255,255);border-color: rgb(255,255,255);border-left-color: rgb(255,255,255);border-radius: 30px;height: 41px;line-height: 1px;text-align: center;width: 225px;">
-                                            Region
-                                        </button>
-                                        <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a
-                                                class="dropdown-item" href="#">Second Item</a><a class="dropdown-item"
-                                                                                                 href="#">Third Item</a>
-                                        </div>
-                                    </div>
+                                    <select title="text" name="select_region" class="dropdown" style="color: rgb(208,202,202);background: rgb(255,255,255);border-color: rgb(255,255,255);border-left-color: rgb(255,255,255);border-radius: 30px;height: 41px;line-height: 1px;text-align: center;width: 225px;"> <! - Add an identifier here instead of using 'name' ->
+                                        <option value="" disabled selected>Region</option>
+                                        <option value="RU">RU</option>
+                                        <option value="BY">BY</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -95,37 +89,30 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12"><input type="date"
-                                                              style="width: 220px;height: 41px;border-radius: 30px;border-color: rgb(255,255,255);border-top-color: rgba(255,255,255,0);border-left-color: rgba(255,255,255,0);">
+                                <div class="col-md-12"><input name="start_date" type="date"
+                                                              style="width: 220px;height: 41px;border-radius: 30px;border-color: rgb(255,255,255);border-top-color: rgba(255,255,255,0);border-left-color: rgba(255,255,255,0);" >
                                 </div>
                                 <div class="col" style="margin-top: 7px;"><span
                                         style="font-size: 14px;">Fixed date</span>
                                 </div>
-                                <div class="col"><input type="date"
-                                                        style="width: 220px;height: 41px;border-radius: 30px;border-color: rgb(255,255,255);border-top-color: rgba(255,255,255,0);border-left-color: rgba(255,255,255,0);">
+                                <div class="col"><input name="end_date" type="date"
+                                                        style="width: 220px;height: 41px;border-radius: 30px;border-color: rgb(255,255,255);border-top-color: rgba(255,255,255,0);border-left-color: rgba(255,255,255,0);" >
                                 </div>
                             </div>
                         </div>
                         <div class="container" style="margin-bottom: 0px;margin-top: 10px;">
                             <div class="row">
-                                <div class="col-md-12" style="text-align: left;"><input type="text"
+                                <div class="col-md-12" style="text-align: left;"><input name="user_name" type="text"
                                                                                         style="width: 225px;border-color: rgb(255,255,255);border-top-color: rgba(255,255,255,0);border-right-color: rgb(255,255,255);border-bottom-color: rgb(255,255,255);border-left-color: rgba(255,255,255,0);border-radius: 30px;font-size: 15px;text-align: center;--bs-light: #ffffff;--bs-light-rgb: 255,255,255;--bs-body-bg: #fff;height: 41px;margin-top: 18px;margin-right: 0px;margin-bottom: 20px;"
                                                                                         placeholder="User name"></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="dropdown"
-                                         style="background: #ffffff;border-radius: 30px;width: 197px;text-align: left;height: 41px;">
-                                        <button class="btn btn-primary dropdown-toggle" aria-expanded="false"
-                                                data-bs-toggle="dropdown" type="button"
-                                                style="color: rgb(208,202,202);background: rgb(255,255,255);border-color: rgb(255,255,255);border-left-color: rgb(255,255,255);border-radius: 30px;height: 41px;line-height: 1px;text-align: center;width: 225px;">
-                                            Source
-                                        </button>
-                                        <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a
-                                                class="dropdown-item" href="#">Second Item</a><a class="dropdown-item"
-                                                                                                 href="#">Third Item</a>
-                                        </div>
-                                    </div>
+                                    <select title="text" name="select_source" class="dropdown" style="color: rgb(208,202,202);background: rgb(255,255,255);border-color: rgb(255,255,255);border-left-color: rgb(255,255,255);border-radius: 30px;height: 41px;line-height: 1px;text-align: center;width: 225px;"> <! - Add an identifier here instead of using 'name' ->
+                                        <option value="" disabled selected>Source</option>
+                                        <option value="Image">Image</option>
+                                        <option value="Video">Video</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
