@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'license_plate_table',
+    'profile_and_site_settings',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
