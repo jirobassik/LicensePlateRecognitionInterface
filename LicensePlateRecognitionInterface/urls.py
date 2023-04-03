@@ -21,4 +21,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('history_page/', include('license_plate_table.urls'), name='history_page'),
+    path('settings/', include('profile_and_site_settings.urls'), name='settings'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
