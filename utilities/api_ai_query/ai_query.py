@@ -8,6 +8,9 @@ API_KEY: Final = 'PXzgyDmk4lbkgCIvNw3o2cDa9We4IzBKDntkLOSIIJ4mf1l1GfAJ0GNNKPhf'
 
 def ai_query(query: str) -> str:
     def remove_substring(string: str) -> str:
+        string = string.replace('public.', '')
+        string = string.replace('SQL', '')
+        string = string.replace('sql', '')
         string = string.replace('```', '')
         string = string.replace('haidisiz.', '')
         string = string.replace(';', '')
@@ -21,8 +24,8 @@ def ai_query(query: str) -> str:
 
     payload = {
         "input": {
-            "schema": "license_plate_table_license_plate",
-            "provider": "haidisiz",
+            "provider": ["haidisiz", ],
+            "schema": ["license_plate_table_license_plate", ],
             "question": f'{query}',
             "dbt_boolean": [
                 "false"
@@ -34,10 +37,10 @@ def ai_query(query: str) -> str:
         "Content-Type": "application/json",
         "Authorization": f"Bearer {API_KEY}"
     }
-
+    print(payload)
     response = requests.post(URL, data=json.dumps(payload), headers=headers)
     query_json: dict[str, str] = response.json()
-
+    print(query_json)
     print(query_json['result'])
     string_query = add_id(remove_substring(query_json['result']))
     print(string_query)
