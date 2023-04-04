@@ -7,7 +7,7 @@ from utilities.api_ai_query.ai_query import ai_query
 
 def get_columns() -> list:
     return [column.name for column in License_plate._meta.get_fields()
-            if column.name != 'id' and column.name != 'field_name']
+            if column.name != 'id']
 
 
 def init_dict_requests(request) -> dict:

@@ -2,19 +2,19 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en" style="height: auto;width: auto;">
+<html lang="EN" style="height: auto;width: auto;">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>License plate 2</title>
+    <title>History page</title>
     <link rel="stylesheet" href={% static 'css/bootstrap.min.css' %}>
     <link rel="stylesheet" href={% static 'fonts/material-icons.min.css' %}>
     <link rel="stylesheet" href={% static 'css/Sidebar-Menu-sidebar.css' %}>
     <link rel="stylesheet" href={% static 'css/sticky-dark-top-nav-1.css' %}>
     <link rel="stylesheet" href={% static 'css/sticky-dark-top-nav.css' %}>
-    <link rel="stylesheet" href={% static 'css/untitled-1.css' %}>
-    <link rel="stylesheet" href={% static 'css/untitled.css' %}>
+    <link rel="stylesheet" href={% static 'css/table_set.css' %}>
+    <link rel="stylesheet" href={% static 'css/border_table_set.css' %}>
     <link rel="stylesheet" href={% static 'css/Perfect-navigation-bar.css' %}>
     <link rel="stylesheet" href={% static 'css/Perfect-navigation-bar.css' %}>
 </head>
@@ -70,7 +70,6 @@
                                 <div class="col-md-12">
                                     <select title="text" name="select_region" class="dropdown"
                                             style="color: rgb(208,202,202);background: rgb(255,255,255);border-color: rgb(255,255,255);border-left-color: rgb(255,255,255);border-radius: 30px;height: 41px;line-height: 1px;text-align: center;width: 225px;">
-                                        <! - Add an identifier here instead of using 'name' ->
                                         <option value="" disabled selected>Region</option>
                                         <option value="RU">RU</option>
                                         <option value="BY">BY</option>
@@ -89,13 +88,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12"><input name="start_date" type="date"
-                                                              style="width: 220px;height: 41px;border-radius: 30px;border-color: rgb(255,255,255);border-top-color: rgba(255,255,255,0);border-left-color: rgba(255,255,255,0);">
+                                                              style="width: 220px;height: 41px;border-radius: 30px;border-color: rgb(255,255,255);border-top-color: rgba(255,255,255,0);border-left-color: rgba(255,255,255,0);text-align: center;">
                                 </div>
                                 <div class="col" style="margin-top: 7px;"><span
                                         style="font-size: 14px;">Fixed date</span>
                                 </div>
                                 <div class="col"><input name="end_date" type="date"
-                                                        style="width: 220px;height: 41px;border-radius: 30px;border-color: rgb(255,255,255);border-top-color: rgba(255,255,255,0);border-left-color: rgba(255,255,255,0);">
+                                                        style="width: 220px;height: 41px;border-radius: 30px;border-color: rgb(255,255,255);border-top-color: rgba(255,255,255,0);border-left-color: rgba(255,255,255,0);text-align: center;">
                                 </div>
                             </div>
                         </div>
@@ -122,45 +121,21 @@
                                     style="width: 225px;height: 50px;background: rgb(35,197,232);border-radius: 30px;margin-top: 25px;">
                                 Search
                             </button>
-                            {#                        <script src="https://code.jquery.com/jquery-3.3.1.js"></script> <!-- Import Jquery Here-->#}
-                            {#                        <script type="text/javascript">#}
-                            {#                            $('#search_button_main').click(function () {#}
-                            {#                                var myInput = $('#query_search').val();#}
-                            {#                                $.ajax({#}
-                            {#                                    url: '/data_table/',#}
-                            {#                                    type: 'POST',#}
-                            {#                                    beforeSend: function (xhr) {#}
-                            {#                                        xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');#}
-                            {#                                    },#}
-                            {#                                    data: {#}
-                            {#                                        'query_search': myInput#}
-                            {#                                    },#}
-                            {#                                    success: function (data) {#}
-                            {#                                        // Вы можете обработать ответ от сервера здесь#}
-                            {#                                    }#}
-                            {#                                });#}
-                            {#                            });#}
-                            {#                        </script>#}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-xl-11 offset-xl-1" style="margin-left: 0;"><span
-                    style="border-width: 0.3px;border-style: solid;font-size: 26px;">License plate</span>
+                    style="font-size: 26px;">License plate</span>
             </div>
             <div class="col-xl-11 offset-xl-1" style="margin-left: 0;">
                 <div class="table-responsive"
-                     style="border-radius: 10px;border-collapse: collapse;min-height: 510px;">
+                     style="border-radius: 2px;border-collapse: collapse;min-height: 510px;">
                     <table class="table">
                         <thead style="background: #e4dfdf;border-style: solid;border-color: #77818c;">
                         <tr>
                             {% for column in columns %}
                                 <th>{{ column }}</th>
-                                {#                    <th>License plate</th>#}
-                                {#                    <th>Region</th>#}
-                                {#                    <th>Date and time</th>#}
-                                {#                    <th>User name</th>#}
-                                {#                    <th>Source</th>#}
                             {% endfor %}
                         </tr>
                         </thead>
@@ -169,13 +144,13 @@
                             <tr>
                                 {% for column in columns %}
                                     {% dynamic_view column item as data %}
-                                    <td>{{ data }}</td>
-                                    {#                                    <td>{{ item.region }}</td>#}
-                                    {#                                    <td>{{ item.date_time }}</td>#}
-                                    {#                                    <td>{{ item.user_name }}</td>#}
-                                    {#                                    <td>{{ item.source }}</td>#}
+                                    {% if column == "field_name" %}
+                                        {% remove_path data.url as path %}
+                                        <td><img src="{% static path %}" style="width:70%"></td>
+                                    {% else %}
+                                        <td>{{ data }}</td>
+                                    {% endif %}
                                 {% endfor %}
-
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -183,12 +158,9 @@
                 </div>
             </div>
             <div class="col-xl-9 offset-xl-2" style="margin-left: 0;">
-                {#            <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'search_view' %}">#}
-                {#                {% csrf_token %}#}
                 <label><input id="query_search" type="text" name="query_search"
                               style="width: 1020px;border-radius: 30px;font-size: 15px;text-align: center;--bs-light: #ffffff;--bs-light-rgb: 255,255,255;--bs-body-bg: #fff;height: 60px;margin-top: 18px;margin-right: 0px;margin-bottom: 20px;border-style: solid;border-color: var(--bs-red);border-top-color: rgb(0,0,0);border-right-color: rgb(0,0,0);border-bottom-color: rgb(0,0,0);border-left-color: rgb(0,0,0);"
                               placeholder="Query search"></label>
-                {#            </form>#}
             </div>
         </form>
     </div>

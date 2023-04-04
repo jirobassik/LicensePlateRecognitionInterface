@@ -17,7 +17,7 @@ def search_view(request):
         search_request = init_dict_requests(request)
         if string_query := search_request['search_query'].string_search:
             main_objs = search_request['search_query'].func_search(string_query, main_objs)
-            columns = [column for column in main_objs.columns if column != "id" and column != 'field_name']
+            columns = [column for column in main_objs.columns if column != "id"]
         else:
             searched_valid_input = dict(
                 filter(lambda text_query: True if text_query[1].string_search else False, search_request.items()))

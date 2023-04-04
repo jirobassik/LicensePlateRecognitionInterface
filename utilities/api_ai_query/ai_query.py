@@ -8,6 +8,7 @@ API_KEY: Final = 'PXzgyDmk4lbkgCIvNw3o2cDa9We4IzBKDntkLOSIIJ4mf1l1GfAJ0GNNKPhf'
 
 def ai_query(query: str) -> str:
     def remove_substring(string: str) -> str:
+        string = string.replace('DISTINCT', '')
         string = string.replace('public.', '')
         string = string.replace('SQL', '')
         string = string.replace('sql', '')
@@ -24,8 +25,18 @@ def ai_query(query: str) -> str:
 
     payload = {
         "input": {
-            "provider": ["haidisiz", ],
-            "schema": ["license_plate_table_license_plate", ],
+            "provider": ["Postgres"],
+            "schema": '''{
+            "table": "license_plate_table_license_plate"
+            "fields": {
+                        "license_plate": "",
+                        "region": "",
+                        "date_time": "",
+                        "user_name": "",
+                        "field_name": "",
+                        "source": ""
+                        }
+            }''',
             "question": f'{query}',
             "dbt_boolean": [
                 "false"
