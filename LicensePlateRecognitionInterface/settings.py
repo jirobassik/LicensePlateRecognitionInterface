@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'license_plate_sign_in_register_interface',
 ]
 
 MIDDLEWARE = [
