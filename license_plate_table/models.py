@@ -1,9 +1,6 @@
 from django.db import models
 from django.urls import reverse
 
-from django.contrib.auth.models import User
-from django_countries.fields import CountryField
-
 
 class License_plate(models.Model):
     license_plate = models.CharField("License plate", max_length=40, null=True)
@@ -20,12 +17,3 @@ class License_plate(models.Model):
     @staticmethod
     def get_absolute_url():
         return reverse('license_plate_data')
-
-
-class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    country = CountryField()
-    city = models.CharField(verbose_name='City', max_length=50)
-
-    def __str__(self):
-        return self.user.__str__()
