@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('history_page/', include('license_plate_table.urls'), name='history_page'),
     path('settings/', include('profile_and_site_settings.urls'), name='settings'),
+    path('license_recognition/', include('license_recognition.urls'), name='license_reg'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
