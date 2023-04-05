@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'license_recognition',
     'license_plate_table',
     'profile_and_site_settings',
     'django.contrib.admin',
