@@ -17,6 +17,8 @@
     <link rel="stylesheet" href={% static 'css/border_table_set.css' %}>
     <link rel="stylesheet" href={% static 'css/Perfect-navigation-bar.css' %}>
     <link rel="stylesheet" href={% static 'css/Perfect-navigation-bar.css' %}>
+    <link rel="stylesheet" href={% static 'css/user_dropdown.css' %}>
+    <link rel="stylesheet" href={% static "fonts/font-awesome.min.css" %}>
 </head>
 
 <body style="width: auto;height: auto;min-height: 715px;">
@@ -27,19 +29,24 @@
                 style="background-color: rgb(255,255,255);color: #ffffff;"><span class="visually-hidden">Toggle navigation</span><span
                 class="navbar-toggler-icon"></span></button>
         <a class="navbar-brand navbar-logo" href="#" style="font-weight: bold;margin-left: -216px;">PLATE RECOGNIZER</a><a
-            class="nav-link" href="javascript:void(0);" style="margin-right: 1px;color: rgb(255,255,255);"><i
-            class="fa fa-search fas fa-tachometer-alt" style="font-size: 18px;"></i>Recognize</a><a class="nav-link"
-                                                                                                    href="javascript:void(0);"
+            class="nav-link" href="{% url 'license_recognition' %}"
+            style="margin-right: 1px;color: rgb(255,255,255);"><i
+            class="fa fa-search fas fa-tachometer-alt" style="font-size: 18px;"></i>  Recognize</a><a class="nav-link"
+                                                                                                    href="{% url 'license_plate_table' %}"
                                                                                                     style="margin-left: 43px;color: rgb(255,255,255);margin-right: -3px;"><i
-            class="fa fa-drivers-license-o far fa-address-book" style="font-size: 18px;"></i>License plate</a>
+            class="fa fa-drivers-license-o far fa-address-book" style="font-size: 18px;"></i>  License plate</a>
         <div id="navcol-1" class="collapse navbar-collapse"
              style="color: rgb(255,255,255);background-color: rgb(255,255,255);"></div>
-        <a class="nav-link" href="javascript:void(0);" style="color: rgb(221,231,248);margin-right: -226px;">user@main.com 
-             
-            <button class="btn btn-primary" type="button"
-                    style="width: 40px;height: 40px;border-radius: 360px;background: rgb(194,200,208);"><i
-                    class="fa fa-user" style="color: rgb(0,0,0);font-size: 20px;"></i></button>
-        </a>
+        <div class="dropdown">
+            <button class="btn btn-primary" type="button" id="user_dropdown"
+                    style="background-color: rgba(221,231,248, 0);margin-right: -226px;border-color: rgba(221,231,248, 0)">user@main.com
+            </button>
+            <div class="dropdown-options">
+                <a href="{% url 'profile_settings' %}">Profile</a>
+                <a href="#">Change password</a>
+                <a href="#">Log out</a>
+            </div>
+        </div>
     </div>
 </nav>
 <script src={% static 'js/Responsive-Active-Navbar.js' %}></script>
@@ -108,7 +115,6 @@
                                 <div class="col-md-12">
                                     <select title="text" name="select_source" class="dropdown"
                                             style="color: rgb(208,202,202);background: rgb(255,255,255);border-color: rgb(255,255,255);border-left-color: rgb(255,255,255);border-radius: 30px;height: 41px;line-height: 1px;text-align: center;width: 225px;">
-                                        <! - Add an identifier here instead of using 'name' ->
                                         <option value="" disabled selected>Source</option>
                                         <option value="Image">Image</option>
                                         <option value="Video">Video</option>
