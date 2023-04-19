@@ -5,8 +5,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>License plate 2</title>
+    <title>Settings</title>
     <link rel="stylesheet" href={% static "css/bootstrap.min.css" %}>
+    <link rel="stylesheet" href={% static "css/Dark-Mode-Switch.css" %}>
+    <link rel="stylesheet" href={% static "css/Dynamic-Table.css" %}>
     <link rel="stylesheet" href={% static "fonts/font-awesome.min.css" %}>
     <link rel="stylesheet" href={% static "css/Perfect-navigation-bar.css" %}>
     <link rel="stylesheet" href={% static "css/Responsive-Active-Navbar.css" %}>
@@ -19,33 +21,11 @@
 </head>
 
 <body>
-<nav class="navbar navbar-dark navbar-expand-md sticky-top shadow-lg"
-     style="color: rgb(47,110,207);opacity: 1;background: rgb(48,112,211);">
-    <div class="container">
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"
-                style="background-color: rgb(255,255,255);color: #ffffff;"><span class="visually-hidden">Toggle navigation</span><span
-                class="navbar-toggler-icon"></span></button>
-        <a class="navbar-brand navbar-logo" href="#" style="font-weight: bold;margin-left: -216px;">PLATE RECOGNIZER</a><a
-            class="nav-link" href="{% url 'license_recognition' %}"
-            style="margin-right: 1px;color: rgb(255,255,255);"><i
-            class="fa fa-search fas fa-tachometer-alt" style="font-size: 18px;"></i>Recognize</a><a class="nav-link"
-                                                                                                    href="{% url 'license_plate_table' %}"
-                                                                                                    style="margin-left: 43px;color: rgb(255,255,255);margin-right: -3px;"><i
-            class="fa fa-drivers-license-o far fa-address-book" style="font-size: 18px;"></i>License plate</a>
-        <div id="navcol-1" class="collapse navbar-collapse"
-             style="color: rgb(255,255,255);background-color: rgb(255,255,255);"></div>
-        <div class="dropdown">
-            <button class="btn btn-primary" type="button" id="user_dropdown"
-                    style="background-color: rgba(221,231,248, 0);margin-right: -226px;border-color: rgba(221,231,248, 0)">user@main.com
-            </button>
-            <div class="dropdown-options">
-                <a href="{% url 'profile_settings' %}">Profile</a>
-                <a href="{% url 'sign_in' %}">Log out</a>
-            </div>
+    <nav class="navbar navbar-dark navbar-expand-md sticky-top shadow-lg" style="color: rgb(47,110,207);opacity: 1;background: rgb(48,112,211);">
+        <div class="container"><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1" style="background-color: rgb(255,255,255);color: #ffffff;"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button><a class="navbar-brand navbar-logo" href="#" style="font-weight: bold;margin-left: -216px;">PLATE RECOGNIZER</a><a class="nav-link" href="javascript:void(0);" style="margin-right: 1px;color: rgb(255,255,255);"><i class="fa fa-search fas fa-tachometer-alt" style="font-size: 18px;"></i>Recognize</a><a class="nav-link" href="javascript:void(0);" style="margin-left: 43px;color: rgb(255,255,255);margin-right: -3px;"><i class="fa fa-drivers-license-o far fa-address-book" style="font-size: 18px;"></i>License plate</a>
+            <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);background-color: rgb(255,255,255);"></div><a class="nav-link" href="javascript:void(0);" style="color: rgb(221,231,248);margin-right: -226px;">user@main.com&nbsp; &nbsp;<button class="btn btn-primary" type="button" style="width: 40px;height: 40px;border-radius: 360px;background: rgb(194,200,208);"><i class="fa fa-user" style="color: rgb(0,0,0);font-size: 20px;"></i></button>&nbsp;</a>
         </div>
-    </div>
-</nav>
-<script src={% static 'js/Responsive-Active-Navbar.js' %}></script>
+    </nav>
     <main class="page payment-page">
         <section class="clean-block payment-form dark">
             <div class="container-fluid">
@@ -53,9 +33,9 @@
                 <div class="card shadow mb-3">
                     <div class="card-body">
                         <form>
+                            {% csrf_token %}
                             <div class="row" style="margin-bottom: 25px;text-align: left;">
-                                <div class="col-sm-4 col-md-4 col-lg-3 col-xl-2 col-xxl-2" style="display: inline;text-align: center;margin-bottom: 25px;"><img class="rounded-circle mb-3 mt-4 img-fluid" src="../assets/img/dogs/image2.jpeg" style="display: inline;max-height: 110px;" width="110" height="110"><br><button class="btn btn-primary btn-sm" id="photoBtn" type="button">Change Photo</button></div>
-                                <div class="col-sm-8 col-md-8 col-lg-9 col-xl-10 col-xxl-10 align-self-center">
+                                <div class="col-sm-8 col-md-8 col-lg-9 col-xl-10 col-xxl-12 align-self-center">
                                     <div class="row">
                                         <div class="col-md-12 text-start">
                                             <div class="mb-3"><label class="form-label" for="email"><strong>Email Address</strong></label><input class="form-control" type="email" id="email" placeholder="user@example.com" name="email" required=""></div>
@@ -95,40 +75,63 @@
             </div>
             <div class="container">
                 <form>
+                    {% csrf_token %}
                     <div class="card-details"></div>
                 </form>
             </div>
         </section>
-        <h1 style="font-size: 34px;margin-left: 30px;">Your transport</h1>
         <div class="card" style="margin-left: 10px;margin-right: 10px;padding-bottom: 0px;margin-bottom: 14px;">
             <div class="card-body" style="margin-left: -2px;margin-right: -2px;">
                 <h4 class="card-title">Car list</h4>
-                <p class="card-text">Press "Add transport" button to add new car to list.</p>
-                <div class="table-responsive" style="margin-left: 70px;margin-right: 70px;">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Model</th>
-                                <th>License plate</th>
-                                <th>Region</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Cell 1</td>
-                                <td>Cell 2</td>
-                                <td>Cell 3</td>
-                            </tr>
-                            <tr>
-                                <td>Enter Model</td>
-                                <td>Enter License plate</td>
-                                <td>Enter Region</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div><button class="btn btn-primary" type="button" style="margin-left: 1156px;">Add transport</button>
+                <p class="card-text">Press "Add transport" button to add new car to list.</p><div class="dynamic-table">
+    <div class="row clearfix">
+		<div class="col-md-12 column">
+			<table class="table table-bordered table-hover dynamic-table-tab_logic">
+				<thead>
+					<tr>
+						<th class="text-center">
+							Model
+						</th>
+						<th class="text-center">
+							License plate
+						</th>
+						<th class="text-center">
+							Region
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class='dynamic-table-addr0' style='display:none;'>
+						<td>
+						<input type="text" name='idn'  placeholder='Identification #' class="form-control"/>
+						</td>
+						<td>
+						<input type="text" name='name' placeholder='Name' class="form-control"/>
+						</td>
+						<td>
+						<input type="text" name='mobile0' placeholder='Relation' class="form-control"/>
+						</td>
+						<td>
+						<input type="text" name='effdate' placeholder='Effective Date' class="datetimepicker form-control"/>
+						</td>
+						<td>
+						<input type="text" name='mobile0' placeholder='Termination Date' class=" datetimepicker form-control"/>
+						</td>
+						<td>
+						<input type="text" name='mobile0' placeholder='Insurance Company' class="form-control"/>
+						</td>
+						<td>
+						</td>
+					</tr>
+                    <tr class='dynamic-table-addr1'></tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<a class="dynamic-table-add_row btn btn-default pull-left">Add Row</a><a class='dynamic-table-delete_row pull-right btn btn-default'>Delete Row</a>
+</div><button class="btn btn-primary" type="button" style="margin-left: 1156px;">Add transport</button>
             </div>
-        </div><span style="font-size: 34px;padding-top: 4px;"><span style="font-size: 34px;margin-right: 528px;padding-left: 0px;margin-left: 28px;">Notification</span>White list</span>
+        </div><span style="font-size: 34px;padding-top: 4px;"></span>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -147,25 +150,54 @@
                             <div class="card" style="margin-left: 10px;margin-right: 10px;width: 650px;">
                                 <div class="card-body" style="margin-left: -2px;margin-right: -2px;">
                                     <h4 class="card-title" style="color: var(--bs-table-color);">White list</h4>
-                                    <p class="card-text" style="color: rgb(31, 37, 41);">Press "Add user" button to add new user to list.</p>
+                                    <p class="card-text" style="color: rgb(31, 37, 41);">Press "Add user" button to add new user to list.</p><div class="dynamic-table">
+    <div class="row clearfix">
+		<div class="col-md-12 column">
+			<table class="table table-bordered table-hover dynamic-table-tab_logic">
+				<thead>
+					<tr>
+						<th class="text-center">
+							User name
+						</th>
+						<th class="text-center">
+							License plate
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class='dynamic-table-addr0' style='display:none;'>
+						<td>
+						<input type="text" name='name0'  placeholder='Name' class="form-control"/>
+						</td>
+						<td>
+						<input type="text" name='mail0' placeholder='SSN' class="form-control"/>
+						</td>
+						<td>
+						<input type="text" name='dateofbirth' placeholder='Date of Birth' class="datetimepicker form-control"/>
+						</td>
+						<td>
+						<input type="text" name='mobile0' placeholder='Relation' class="form-control"/>
+						</td>
+						<td>
+						<select type="text" name='mobile0' placeholder='Please Select' class="form-control">
+                            <option value='m'>Male</option>
+                            <option value='f'>Female</option>
+                        </select>
+						</td>
+					</tr>
+                    <tr class='dynamic-table-addr1'></tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<a class="dynamic-table-add_row btn btn-default pull-left">Add Row</a><a class='dynamic-table-delete_row pull-right btn btn-default'>Delete Row</a>
+</div>
                                     <div class="table-responsive" style="margin-left: 70px;margin-right: 70px;">
                                         <table class="table">
                                             <thead>
-                                                <tr>
-                                                    <th>User name</th>
-                                                    <th>License plate</th>
-                                                </tr>
+                                                <tr></tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th>Cell 1</th>
-                                                    <th>Cell 2</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>Enter User name</th>
-                                                    <th>Enter License plate</th>
-                                                </tr>
-                                            </tbody>
+                                            <tbody></tbody>
                                         </table>
                                     </div><button class="btn btn-primary" type="button" style="margin-left: 466px;">Add user</button>
                                 </div>
@@ -178,6 +210,9 @@
         </div>
     </main>
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/js/Dark-Mode-Switch.js"></script>
+    <script src="../assets/js/Dynamic-Table-1.js"></script>
+    <script src="../assets/js/Dynamic-Table.js"></script>
     <script src="https://geodata.solutions/includes/countrystate.js"></script>
     <script src="../assets/js/Responsive-Active-Navbar.js"></script>
 </body>
