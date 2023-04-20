@@ -1,10 +1,11 @@
 from django import forms
 
-from profile_and_site_settings.models import Profile, LicensePlate, WhiteList
+from profile_and_site_settings.models import Profile, LicensePlateList, WhiteList
 
 
 class ProfileForm(forms.Form):
-    pass
+    class Meta:
+        pass
 
 
 class LicensePlateForm(forms.Form):
