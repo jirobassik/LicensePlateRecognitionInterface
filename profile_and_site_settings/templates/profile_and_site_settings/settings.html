@@ -32,7 +32,7 @@
                 <h3 class="text-dark mb-4" style="height: 26.5938px;margin: 13px;font-size: 34px;margin-left: 15px;">Profile</h3>
                 <div class="card shadow mb-3">
                     <div class="card-body">
-                        <form>
+                        <form method="post">
                             {% csrf_token %}
                             <div class="row" style="margin-bottom: 25px;text-align: left;">
                                 <div class="col-sm-8 col-md-8 col-lg-9 col-xl-10 col-xxl-12 align-self-center">
@@ -46,10 +46,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 text-start">
-                                    <div class="mb-3"><label class="form-label" for="username"><strong>Password</strong></label><input class="form-control" type="password" id="password" placeholder="Password"></div>
+                                    <div class="mb-3"><label class="form-label" for="password"><strong>Password</strong></label><input class="form-control" type="password" id="password" placeholder="Password"></div>
                                 </div>
                                 <div class="col-md-6 text-start">
-                                    <div class="mb-3"><label class="form-label" for="username"><strong>Confirm Password</strong></label><input class="form-control" type="password" id="verifyPassword" placeholder="Password"></div>
+                                    <div class="mb-3"><label class="form-label" for="confirm_password"><strong>Confirm Password</strong></label><input class="form-control" type="password" id="verifyPassword" placeholder="Password"></div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3"><label class="form-label" for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" placeholder="John" name="first_name" required=""></div>
@@ -57,12 +57,22 @@
                                 <div class="col-md-6">
                                     <div class="mb-3"><label class="form-label" for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" placeholder="Doe" name="last_name" required=""></div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3"><label class="form-label" for="country"><strong>Country</strong></label><select class="form-select countries order-alpha limit-pop-1000000 presel-MX group-continents group-order-na" id="countryId" name="country" required=""></select></div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3"><label class="form-label" for="city"><strong>City</strong></label><input class="form-control" type="text" id="cityId" placeholder="Los Angeles" name="city" required=""></div>
-                                </div>
+{#                                <div class="col-md-6">#}
+{#                                    <div class="mb-3">#}
+{#                                        <label class="form-label" for="countryId"><strong>Country</strong></label>#}
+{#                                        <select class="form-select countries order-alpha limit-pop-1000000 presel-MX group-continents group-order-na" id="countryId" name="country" required="">#}
+{#                                            <option>{{ country_choice }}</option>#}
+{#                                            <option>2</option>#}
+{#                                            <option>3</option>#}
+{#                                            {% for country in country_tag %}#}
+{#                                                <option value="{{ country.code }}">{{ country.name }}</option>#}
+{#                                            {% endfor %}#}
+{#                                        </select>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-md-6">#}
+{#                                    <div class="mb-3"><label class="form-label" for="city"><strong>City</strong></label><input class="form-control" type="text" id="cityId" placeholder="Los Angeles" name="city" required=""></div>#}
+{#                                </div>#}
                                 <div class="col">
                                     <p id="emailErrorMsg" class="text-danger" style="display:none;"></p>
                                     <p id="passwordErrorMsg" class="text-danger" style="display:none;"></p>
@@ -209,12 +219,12 @@
             </table>
         </div>
     </main>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/js/Dark-Mode-Switch.js"></script>
-    <script src="/js/Dynamic-Table-1.js"></script>
-    <script src="/js/Dynamic-Table.js"></script>
-    <script src="https://geodata.solutions/includes/countrystate.js"></script>
-    <script src="/js/Responsive-Active-Navbar.js"></script>
+    <script src={% static "/bootstrap/js/bootstrap.min.js" %}></script>
+    <script src={% static "/js/Dark-Mode-Switch.js" %}></script>
+    <script src={% static "/js/Dynamic-Table-1.js" %}></script>
+    <script src={% static "/js/Dynamic-Table.js" %}></script>
+    <script src={% static "https://geodata.solutions/includes/countrystate.js" %}></script>
+    <script src={% static "/js/Responsive-Active-Navbar.js" %}></script>
 </body>
 
 </html>

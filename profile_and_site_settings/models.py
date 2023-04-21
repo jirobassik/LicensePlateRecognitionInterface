@@ -31,8 +31,6 @@ class WhiteList(models.Model):
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    country = CountryField()
-    city = models.CharField(verbose_name="City", max_length=50)
     user_white_list = models.ManyToManyField(WhiteList, verbose_name="User \"White list\"")
     user_license_plate = models.ManyToManyField(LicensePlateList, verbose_name="User license plate")
     notifications_about_new_features = models.BooleanField(
