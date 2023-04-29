@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django_countries.fields import CountryField
 
 
-class LicensePlate(models.Model):
+class LicensePlateList(models.Model):
     car_model = models.CharField(verbose_name="Model", max_length=100)
     license_plate = models.CharField(verbose_name="License plate", max_length=10)
     region = CountryField(verbose_name="Region")
@@ -13,8 +13,8 @@ class LicensePlate(models.Model):
         return self.license_plate
 
     class Meta:
-        verbose_name = "License plate"
-        verbose_name_plural = "License plates"
+        verbose_name = "License plate list"
+        verbose_name_plural = "License plate lists"
 
 
 class WhiteList(models.Model):
@@ -25,16 +25,14 @@ class WhiteList(models.Model):
         return self.user_name
 
     class Meta:
-        verbose_name = "License plate"
-        verbose_name_plural = "License plates"
+        verbose_name = "White list"
+        verbose_name_plural = "White lists"
 
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    country = CountryField()
-    city = models.CharField(verbose_name="City", max_length=50)
     user_white_list = models.ManyToManyField(WhiteList, verbose_name="User \"White list\"")
-    user_license_plate = models.ManyToManyField(LicensePlate, verbose_name="User license plate")
+    user_license_plate = models.ManyToManyField(LicensePlateList, verbose_name="User license plate")
     notifications_about_new_features = models.BooleanField(
         verbose_name="Notification about new features", default=True
     )

@@ -1,8 +1,8 @@
 from django.urls import path
 
-from profile_and_site_settings.views import SettingsListView
+from profile_and_site_settings.views import SettingsView
 
 
 urlpatterns = [
-    path('', SettingsListView.as_view(), name='profile_settings'),
+    path('', SettingsView.as_view(), name='profile_settings'),
 ]
