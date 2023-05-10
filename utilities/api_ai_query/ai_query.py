@@ -2,8 +2,10 @@ import requests
 import json
 from typing import Final
 
-URL: Final = "https://app.airops.com/public_api/data_apps/1010/execute"
-API_KEY: Final = 'PXzgyDmk4lbkgCIvNw3o2cDa9We4IzBKDntkLOSIIJ4mf1l1GfAJ0GNNKPhf'
+# URL: Final = "https://app.airops.com/public_api/data_apps/1009/execute"
+URL: Final = "https://app.airops.com/public_api/data_apps/5247/execute"
+# API_KEY: Final = 'PXzgyDmk4lbkgCIvNw3o2cDa9We4IzBKDntkLOSIIJ4mf1l1GfAJ0GNNKPhf'
+API_KEY: Final = 'qBGJQVkh9kIzpZRXNGHwu_N9rCcdJFqOeqlKYboZAfwgHV62jx4wLIGXQVFA'
 
 
 def ai_query(query: str) -> str:
@@ -23,10 +25,30 @@ def ai_query(query: str) -> str:
         string_.insert(1, 'id,')
         return " ".join(string_)
 
-    payload = {
-        "input": {
-            "provider": ["Postgres"],
-            "schema": '''{
+    # payload = {
+    #     "input": {
+    #         "provider": ["Postgres"],
+    #         "schema": '''{
+    #         "table": "license_plate_table_license_plate"
+    #         "fields": {
+    #                     "license_plate": "",
+    #                     "region": "",
+    #                     "date_time": "",
+    #                     "user_name": "",
+    #                     "field_name": "",
+    #                     "source": ""
+    #                     }
+    #         }''',
+    #         "question": f'{query}',
+    #         "dbt_boolean": [
+    #             "false"
+    #         ]
+    #     }
+    # }
+
+    payload = {"input": {
+        "provider": ["PostgreSQL"],
+        "schema": '''{
             "table": "license_plate_table_license_plate"
             "fields": {
                         "license_plate": "",
@@ -37,22 +59,22 @@ def ai_query(query: str) -> str:
                         "source": ""
                         }
             }''',
-            "question": f'{query}',
-            "dbt_boolean": [
-                "false"
-            ]
-        }
-    }
+        "question": f'{query}',
+        "dbt_boolean": [],
+        "model": ["gpt-3.5-turbo-0301"]
+    }}
 
+    print(payload)
     headers = {
-        "Content-Type": "application/json",
+        "accept": "application/json",
+        "content-type": "application/json",
         "Authorization": f"Bearer {API_KEY}"
     }
     print(payload)
-    response = requests.post(URL, data=json.dumps(payload), headers=headers)
+    print(json.dumps(payload, indent=4))
+    response = requests.post(URL, json=payload, headers=headers)
+    print(response.text)
     query_json: dict[str, str] = response.json()
     print(query_json)
-    print(query_json['result'])
     string_query = add_id(remove_substring(query_json['result']))
-    print(string_query)
     return string_query
