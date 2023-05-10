@@ -31,7 +31,7 @@
                         </div>
                         <form class="text-center" action="{% url 'profile_settings' %}">
                             {% csrf_token %}
-                            <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email">
+                            <div class="mb-3"><input class="form-control" type="text" name="name" placeholder="Name">
                             </div>
                             <div class="mb-3"><input class="form-control" type="password" name="password"
                                                      placeholder="Password"></div>
