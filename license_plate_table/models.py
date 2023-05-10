@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 
+from profile_and_site_settings.models import WhiteList
+
 
 class License_plate(models.Model):
     license_plate = models.CharField("License plate", max_length=40, null=True)
