@@ -1,3 +1,4 @@
+import django.db
 from django.shortcuts import render
 from license_plate_table.models import License_plate
 from utilities.data_repr.column_func import get_columns, init_dict_requests
@@ -16,8 +17,12 @@ def search_view(request):
     if request.method == 'GET':
         search_request = init_dict_requests(request)
         if string_query := search_request['search_query'].string_search:
-            main_objs = search_request['search_query'].func_search(string_query, main_objs)
-            columns = [column for column in main_objs.columns if column != "id"]
+            try:
+                main_objs = search_request['search_query'].func_search(string_query, main_objs)
+                columns = [column for column in main_objs.columns if column != "id"]
+            except django.db.utils.ProgrammingError:
+                main_objs = License_plate.objects.all()
+                columns = get_columns()
         else:
             searched_valid_input = dict(
                 filter(lambda text_query: True if text_query[1].string_search else False, search_request.items()))
