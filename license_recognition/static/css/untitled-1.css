@@ -6,3 +6,22 @@ tbody, td, tfoot, th, thead, tr {
   border-top: 1px solid #77818c;
 }
 
+.custom-file-upload {
+    color: black;
+    background-color: grey;
+    border-radius: 12px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 60px 40px;
+    cursor: pointer;
+}
+
+.custom-file-upload:hover {
+    background-color: #4CAF50; /* black */
+    color: white;
+}
+
+input[type = "file"]{
+    display: none;
+}
