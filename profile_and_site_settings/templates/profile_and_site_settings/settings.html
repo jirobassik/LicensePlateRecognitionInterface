@@ -21,25 +21,52 @@
 </head>
 
 <body>
+{#<nav class="navbar navbar-dark navbar-expand-md sticky-top shadow-lg"#}
+{#     style="color: rgb(47,110,207);opacity: 1;background: rgb(48,112,211);">#}
+{#    <div class="container">#}
+{#        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"#}
+{#                style="background-color: rgb(255,255,255);color: #ffffff;"><span class="visually-hidden">Toggle navigation</span><span#}
+{#                class="navbar-toggler-icon"></span></button>#}
+{#        <a class="navbar-brand navbar-logo" href="#" style="font-weight: bold;margin-left: -216px;">PLATE RECOGNIZER</a><a#}
+{#            class="nav-link" href="javascript:void(0);" style="margin-right: 1px;color: rgb(255,255,255);"><i#}
+{#            class="fa fa-search fas fa-tachometer-alt" style="font-size: 18px;"></i>Recognize</a><a class="nav-link"#}
+{#                                                                                                    href="javascript:void(0);"#}
+{#                                                                                                    style="margin-left: 43px;color: rgb(255,255,255);margin-right: -3px;"><i#}
+{#            class="fa fa-drivers-license-o far fa-address-book" style="font-size: 18px;"></i>License plate</a>#}
+{#        <div class="collapse navbar-collapse" id="navcol-1"#}
+{#             style="color: rgb(255,255,255);background-color: rgb(255,255,255);"></div>#}
+{#        <a class="nav-link" href="javascript:void(0);"#}
+{#           style="color: rgb(221,231,248);margin-right: -226px;">{{ user_info.username }}#}
+{#            &nbsp;<button class="btn btn-primary" type="button"#}
+{#                          style="width: 40px;height: 40px;border-radius: 360px;background: rgb(194,200,208);"><i#}
+{#                    class="fa fa-user" style="color: rgb(0,0,0);font-size: 20px;"></i></button>&nbsp;</a>#}
+{#    </div>#}
+{#</nav>#}
 <nav class="navbar navbar-dark navbar-expand-md sticky-top shadow-lg"
      style="color: rgb(47,110,207);opacity: 1;background: rgb(48,112,211);">
     <div class="container">
-        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"
                 style="background-color: rgb(255,255,255);color: #ffffff;"><span class="visually-hidden">Toggle navigation</span><span
                 class="navbar-toggler-icon"></span></button>
         <a class="navbar-brand navbar-logo" href="#" style="font-weight: bold;margin-left: -216px;">PLATE RECOGNIZER</a><a
-            class="nav-link" href="javascript:void(0);" style="margin-right: 1px;color: rgb(255,255,255);"><i
-            class="fa fa-search fas fa-tachometer-alt" style="font-size: 18px;"></i>Recognize</a><a class="nav-link"
-                                                                                                    href="javascript:void(0);"
-                                                                                                    style="margin-left: 43px;color: rgb(255,255,255);margin-right: -3px;"><i
-            class="fa fa-drivers-license-o far fa-address-book" style="font-size: 18px;"></i>License plate</a>
-        <div class="collapse navbar-collapse" id="navcol-1"
+            class="nav-link" href="{% url 'license_recognition' %}"
+            style="margin-right: 1px;color: rgb(255,255,255);"><i
+            class="fa fa-search fas fa-tachometer-alt" style="font-size: 18px;"></i> Recognize</a><a class="nav-link"
+                                                                                                     href="{% url 'license_plate_table' %}"
+                                                                                                     style="margin-left: 43px;color: rgb(255,255,255);margin-right: -3px;"><i
+            class="fa fa-drivers-license-o far fa-address-book" style="font-size: 18px;"></i> License plate</a>
+        <div id="navcol-1" class="collapse navbar-collapse"
              style="color: rgb(255,255,255);background-color: rgb(255,255,255);"></div>
-        <a class="nav-link" href="javascript:void(0);"
-           style="color: rgb(221,231,248);margin-right: -226px;">{{ user_info.username }}
-            &nbsp;<button class="btn btn-primary" type="button"
-                          style="width: 40px;height: 40px;border-radius: 360px;background: rgb(194,200,208);"><i
-                    class="fa fa-user" style="color: rgb(0,0,0);font-size: 20px;"></i></button>&nbsp;</a>
+        <div class="dropdown">
+            <button class="btn btn-primary" type="button" id="user_dropdown"
+                    style="background-color: rgba(221,231,248, 0);margin-right: -226px;border-color: rgba(221,231,248, 0)">
+                Settings
+            </button>
+            <div class="dropdown-options">
+                <a href="{% url 'profile_settings' %}">Profile</a>
+                <a href="{% url 'sign_in' %}">Log out</a>
+            </div>
+        </div>
     </div>
 </nav>
 <main class="page payment-page">
@@ -152,9 +179,9 @@
                             </table>
                         </div>
                     </div>
-                        <button class="dynamic-table-delete_row pull-right btn btn-default" name="delete_license_plate">
-                            Delete Row
-                        </button>
+                    <button class="dynamic-table-delete_row pull-right btn btn-default" name="delete_license_plate">
+                        Delete Row
+                    </button>
                 </div>
                 <button class="btn btn-primary" type="submit" name="add_license_plate" style="margin-left: 1156px;">Add
                     transport
@@ -174,19 +201,24 @@
                              style="margin-left: 10px;margin-right: 10px;width: 650px;margin-bottom: 19px;">
                             <div class="card-body" style="margin-left: -2px;margin-right: -2px;">
                                 <h4 class="card-title" style="color: rgb(33,37,41);">Notification</h4>
-{#                                <input type="checkbox"><span style="color: var(--bs-table-color);margin-left: 4px;">Notify about new features</span>#}
-                                <p style="margin-top: 15px;margin-bottom: 16px;"><input type="checkbox" name="new_features"><span
+                                {#                                <input type="checkbox"><span style="color: var(--bs-table-color);margin-left: 4px;">Notify about new features</span>#}
+                                <p style="margin-top: 15px;margin-bottom: 16px;"><input type="checkbox"
+                                                                                        name="new_features"><span
                                         style="color: var(--bs-table-color);margin-left: 4px;">Notify about new features</span>Paragraph
                                 </p>
-                                <p style="margin-top: 15px;margin-bottom: 16px;"><input type="checkbox" name="my_license_plate_on_photo"><span
+                                <p style="margin-top: 15px;margin-bottom: 16px;"><input type="checkbox"
+                                                                                        name="my_license_plate_on_photo"><span
                                         style="color: var(--bs-table-color);margin-left: 4px;">Notify when my license plate on photo</span>Paragraph
                                 </p>
                                 <p><input type="checkbox" name="white_list_license_plate_on_photo"><span
                                         style="color: var(--bs-table-color);margin-top: 3px;margin-left: 4px;">Notify when license plate from white list on photo</span>Paragraph
                                 </p>
-                                <p><input type="checkbox" name="unfamiliar_license_plate_on_photo"><span style="color: var(--bs-table-color);margin-left: 4px;">Notify when unfamiliar license plate on photo</span>Paragraph
+                                <p><input type="checkbox" name="unfamiliar_license_plate_on_photo"><span
+                                        style="color: var(--bs-table-color);margin-left: 4px;">Notify when unfamiliar license plate on photo</span>Paragraph
                                 </p>
-                                <button class="btn btn-primary" type="submit" name="checkbox_submit" style="margin-left: 565px;">Save</button>
+                                <button class="btn btn-primary" type="submit" name="checkbox_submit"
+                                        style="margin-left: 565px;">Save
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -234,9 +266,10 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <button class="dynamic-table-delete_row pull-right btn btn-default" name="delete_white_list">
-                            Delete Row
-                        </button>
+                                    <button class="dynamic-table-delete_row pull-right btn btn-default"
+                                            name="delete_white_list">
+                                        Delete Row
+                                    </button>
                                 </div>
                                 <div class="table-responsive" style="margin-left: 70px;margin-right: 70px;">
                                     <table class="table">
