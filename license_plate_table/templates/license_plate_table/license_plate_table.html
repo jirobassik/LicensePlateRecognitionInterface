@@ -138,11 +138,11 @@
                      style="border-radius: 2px;border-collapse: collapse;min-height: 510px;">
                     <table class="table">
                         <thead style="background: #e4dfdf;border-style: solid;border-color: #77818c;">
-                        <tr>
-                            {% for column in columns %}
-                                <th>{{ column }}</th>
-                            {% endfor %}
-                        </tr>
+                            <tr>
+                                {% for column in columns %}
+                                    <th>{{ column }}</th>
+                                {% endfor %}
+                            </tr>
                         </thead>
                         <tbody>
                         {% for item in license_plate %}
@@ -151,7 +151,7 @@
                                     {% dynamic_view column item as data %}
                                     {% if column == "field_name" %}
                                         {% remove_path data.url as path %}
-                                        <td><img src="{% static path %}" style="width:70%"></td>
+                                        <td><img src="{% static path %}" style="width:70%" alt="license plate"></td>
                                     {% else %}
                                         <td>{{ data }}</td>
                                     {% endif %}
