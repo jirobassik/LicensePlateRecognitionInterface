@@ -114,12 +114,12 @@
 {#    <div data-bss-parallax-bg="true" style="height: 700px;background-image: url(https://cdn.bootstrapstudio.io/placeholders/1400x800.png);background-position: center;background-size: cover;transform: scale(0.42);"></div>#}
 <div style="position: relative;">
     {#  <img src="{% if path_to_file %}{{ path_to_file }}{% endif %}" style="position: relative; z-index: 1;" alt="">#}
-    <div style="position: absolute; top: 0; left: 0; z-index: 0; height: 62px; background: rgba(188,217,213,0.81); margin: 463px 310px 0px; width: 387px; border-radius: 20px; transform: translate(38px);">
+    <div style="position: absolute; top: -600px; left: 300px; z-index: 0; height: 104px; background: rgba(188,217,213,0.81); margin: 463px 310px 0px; width: 387px; border-radius: 20px; transform: translate(38px);">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <label class="btn btn-primary"
                    style="display:inline-block;border-radius: 20px;height: 39px;margin: 12px 24px 0px;background: var(--bs-body-bg);color: rgb(0,0,0);border-color: rgb(0,0,0);"><input
-                    type="file" name="image">Upload</label>
+                    type="file" name="image"></label>
             <button class="btn btn-primary" type="submit"
                     style="border-radius: 20px;height: 39px;margin: 12px 72px 0px;background: var(--bs-body-bg);color: rgb(0,0,0);border-color: rgb(0,0,0);transform: translate(49px);"
                     name="upload_photo">Recognize
